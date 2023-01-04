@@ -26,12 +26,7 @@ export default TestScreen = () => {
       <View style={{ flex: 1, padding: 24 }}>
         {isLoading ? <Text>Loading...</Text> : 
         ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>
-            <FlatList
-              data={data}
-              renderItem={({ item }) => (
-                <Text>{item}</Text>
-              )}
-            />
+
           </View>
         )}
       </View>

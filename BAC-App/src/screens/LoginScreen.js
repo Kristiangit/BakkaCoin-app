@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Touchable, TouchableWithoutFeedback, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, Touchable, TouchableWithoutFeedback, TextInput, SafeAreaView } from 'react-native';
 import Navbar from '../components/Navbar';
 
 
 export default function Login({ navigation }) {
   return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Navbar />
+        <View style={styles.inContainer}>
         <View style={styles.textBubble}>
 
           <TextInput style={styles.inpBubble} ></TextInput>
@@ -18,7 +19,8 @@ export default function Login({ navigation }) {
           </View>
         </TouchableWithoutFeedback>
         <View></View>
-      </View>
+        </View>
+      </SafeAreaView>
   );
 }
 
@@ -26,6 +28,14 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#27272A',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  inContainer: {
+    flex: 1,
+    width: '100%',
     flexDirection: 'column',
     backgroundColor: '#501b88',
     alignItems: 'center',

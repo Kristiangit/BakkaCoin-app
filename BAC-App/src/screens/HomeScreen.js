@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, ScrollView, Image, SafeAreaView } from 'react-native';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -10,42 +10,44 @@ import Footer from '../components/Footer';
 export default function Home({ navigation }) {
 
   return (
-    <View style={{height:'100%', backgroundColor: 'black', alignItems: 'center',}}>
+    <SafeAreaView style={{height:'100%', backgroundColor: '#27272A', }}>
         <Navbar />
-        <ScrollView contentContainerStyle={styles.scrollContainer} style={{flex:1, backgroundColor: 'black',}}>
-          <View style={{flex: 1, alignItems:'center'}}>
-            <Text style={styles.bTitle}>500.00 BAC</Text>
-            {/* <Text style={styles.Title}>BAC</Text> */}
-          </View>
-          <View style={styles.darkBubble}>
-            <Text style={styles.Title}>Historikk</Text>
-            <View style={styles.dBubble}>
-              <Usertab Navn="Viktor"/>
-                <Usertab Navn="Isak"/>
-              <Usertab Navn="Magnus"/>
-              <Usertab Navn="Nicolay"/>
-              <Usertab Navn="Kristian"/>
+        <View style={{width: '100%', height: '100%', flex: 1, }}>
+          <ScrollView contentContainerStyle={styles.scrollContainer} style={{flex:1, backgroundColor: 'black',}}>
+            <View style={{flex: 1, alignItems:'center'}}>
+              <Text style={styles.bTitle}>500.00 BAC</Text>
+              {/* <Text style={styles.Title}>BAC</Text> */}
             </View>
-          </View>
+            <View style={styles.darkBubble}>
+              <Text style={styles.Title}>Historikk</Text>
+              <View style={styles.dBubble}>
+                <Usertab Navn="Viktor"/>
+                  <Usertab Navn="Isak"/>
+                <Usertab Navn="Magnus"/>
+                <Usertab Navn="Nicolay"/>
+                <Usertab Navn="Kristian"/>
+              </View>
+            </View>
 
-          <View style={{height: 60,}}></View>
-        </ScrollView>
-        <View style={styles.HotBubble}>
-            <TouchableWithoutFeedback style={{flex: 1}}>
-              <View style= {{flex: 1, alignItems: 'center'}}>
-                <Image source={require('../static/img/dArrow.png')} style={[styles.arrow, {transform: [{rotateX: '180deg'}]}]}/>
-                <Text style={hotbar}>Send</Text>
-              </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback style={{flex: 1}}>
-              <View style= {{flex: 1, alignItems: 'center'}}>
-                <Image source={require('../static/img/dArrow.png')} style={styles.arrow}/>
-                <Text style={hotbar}>Be om</Text>
-              </View>
-            </TouchableWithoutFeedback>
+            <View style={{height: 60,}}></View>
+          </ScrollView>
+          <View style={styles.HotBubble}>
+              <TouchableWithoutFeedback style={{flex: 1}}>
+                <View style= {{flex: 1, alignItems: 'center'}}>
+                  <Image source={require('../static/img/dArrow.png')} style={[styles.arrow, {transform: [{rotateX: '180deg'}]}]}/>
+                  <Text style={hotbar}>Send</Text>
+                </View>
+              </TouchableWithoutFeedback>
+              <TouchableWithoutFeedback style={{flex: 1}}>
+                <View style= {{flex: 1, alignItems: 'center'}}>
+                  <Image source={require('../static/img/dArrow.png')} style={styles.arrow}/>
+                  <Text style={hotbar}>Be om</Text>
+                </View>
+              </TouchableWithoutFeedback>
+          </View>
         </View>
         <Footer navigation={navigation}/>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -80,6 +82,7 @@ const styles = StyleSheet.create({
     maxWidth: '100%',
     height: '11%',
     bottom: 50,
+    alignSelf: "center",
   },
   darkBubble: {
     flex: 1,

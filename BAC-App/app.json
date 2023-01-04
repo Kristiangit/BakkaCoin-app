@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "BAC_Vipps",
-    "slug": "BAC_Vipps",
+    "name": "BAC_App",
+    "slug": "BAC_App",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

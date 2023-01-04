@@ -1,17 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Touchable, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, Button, Touchable, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
 import Navbar from '../components/Navbar';
 
 
 export default function SignUp({ navigation }) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={[styles.container, {backgroundColor: '#27272A'}]}>
         <Navbar />
         <View style={styles.container}> 
           <Text>SignUpPage</Text>
           <Button title="Next" onPress={() => navigation.navigate('Test')} style={styles.textBubble}/>
         </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

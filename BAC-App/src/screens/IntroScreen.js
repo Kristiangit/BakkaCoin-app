@@ -1,13 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Touchable, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, Button, Touchable, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 import Navbar from '../components/Navbar';
+
 
 
 export default function Intro({ navigation }) {
   return (
-      <View style={styles.container}>
+      <SafeAreaView style={[styles.container, {backgroundColor: '#27272A',}]}>
         <Navbar />
-
+        <View style={styles.container}>
           <View style={[styles.textBubble, styles.border]}>
             <Text style={styles.bTitle} >Bli med i Bakka<Text style={{color: "#AF7BE5",}}>Coin</Text>!</Text>
             <Text style={styles.Title}>Elvebakkens digitale</Text>
@@ -30,7 +31,8 @@ export default function Intro({ navigation }) {
 
         <View></View>
         <StatusBar style="light" />
-      </View>
+        </View>
+      </SafeAreaView>
   );
 }
 
@@ -42,6 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#501b88',
     alignItems: 'center',
     justifyContent: 'space-between',
+    width: '100%'
   },
   textBubble: {
     backgroundColor: "#27272A",
