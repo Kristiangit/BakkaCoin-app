@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 15,
-    borderRadius: '50%',
+    borderRadius: parseFloat("50%"),
     width: 250,
     height: 50,
     opacity: 0.75
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 15,
-    borderRadius: '50%',
+    borderRadius: parseFloat("50%"),
     width: '60%',
     maxWidth: '100%',
     height: '11%',

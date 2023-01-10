@@ -1,25 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Text, View, ActivityIndicator } from 'react-native';
 
 export default TestScreen = () => {
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
 
-  fetch("https://10.58.176.209:8000/api", {
-    "credentials": 'include',
-    "method" : "GET",
-    "headers": {
-        'Content-Type': 'application/json',
+  const getMovies = async () => {
+     try {
+      const response = await fetch('http://10.58.176.209:5000/api');
+      console.log(response.status)
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-    },
+  useEffect(() => {
+    getMovies();
+  }, []);
 
-  })
-  .then((response) => console.log(response.status))
-  .then(() => console.log("d"))
-  // .catch((error) => console.log(error))
-  .then((response) => console.log(response))
-  .then(() => console.log("bur"));
-  // .then((data) => setData(data["woop"]));
+  // fetch("http://10.58.176.209:8003", {
+  //   "credentials": 'include',
+  //   "method" : "GET",
+  //   "headers": {
+  //       'Content-Type': 'application/json',
+  //   },
+  // })
+  // .then((response) => console.log(response.status))
+  // .then(() => console.log("d"))
+  // // .catch((error) => console.log(error))
+  // .then((response) => console.log(response))
+  // .catch(function(error) {
+  //   console.log(error)
+  //   console.log(error.message)
+  // });
+  // // .then((data) => setData(data["woop"]));
 
     return (
   
@@ -32,4 +48,3 @@ export default TestScreen = () => {
       </View>
     );
   };
-
