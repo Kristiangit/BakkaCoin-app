@@ -8,17 +8,20 @@ export default function Login({ navigation }) {
       <SafeAreaView style={styles.container}>
         <Navbar />
         <View style={styles.inContainer}>
-        <View style={styles.textBubble}>
+          <View style={styles.mainBubble}>
+            <Text>Logg inn:</Text>
+            <TextInput style={styles.inpBubble} placeholder="E-post"></TextInput>
+            <TextInput style={styles.inpBubble} placeholder="Passord"></TextInput>
 
-          <TextInput style={styles.inpBubble} ></TextInput>
-        </View>
-
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')} >
-          <View style={styles.textBubble}>
-            <Text>Login!</Text>
+            
           </View>
-        </TouchableWithoutFeedback>
-        <View></View>
+
+          <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')} >
+            <View style={styles.mainBubble}>
+              <Text>Login!</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          {/* <View></View> */}
         </View>
       </SafeAreaView>
   );
@@ -39,25 +42,29 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#501b88',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
-  textBubble: {
-    backgroundColor: "#27272A",
+  mainBubble: {
+    backgroundColor: "#fffff",
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 15,
-    borderRadius: 12,
+    paddingHorizontal: 25,
+    paddingVertical : 50,
+    borderRadius: "30%",
     maxWidth: '100%',
     borderColor: '#461E71',
     borderWidth: 3,
     margin: 25,
   },
   inpBubble: {
-    backgroundColor: "#27272A",
+    backgroundColor: "#fff",
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 15,
-    borderRadius: 12,
+    width: 200, 
+    padding: 10,
+    borderColor: "#27272A",
+    borderWidth: 3,
+    borderRadius: '30%',
     maxWidth: '100%',
     margin: 25,
   },

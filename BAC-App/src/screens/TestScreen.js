@@ -7,10 +7,12 @@ export default TestScreen = () => {
 
   const getMovies = async () => {
      try {
-      const response = await fetch('http://10.58.176.209:5000/api');
+      const response = await fetch('http://127.0.0.1:5000/api');
       console.log(response.status)
+      console.log(response.body)
+      console.log(response.content)
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       setLoading(false);
     }
