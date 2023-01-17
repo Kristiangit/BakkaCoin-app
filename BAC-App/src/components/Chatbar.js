@@ -1,15 +1,15 @@
-import { StyleSheet,  SafeAreaView, Image, } from 'react-native';
+import { StyleSheet,  SafeAreaView, Image, TouchableWithoutFeedback} from 'react-native';
 // import { isIphoneWithNotch } from '../screens/IntroScreen'
 
 
 
-export default function Navbar({}) {
+export default function Chatbar({ Navn, navigation }) {
     return (
         <SafeAreaView style={styles.navbar}>
-        {/* <Button>Click</Button> */}
-        <Image source={require('../static/img/Bakkacoin-logo-hvit2.png')} style={styles.logo}/>
-        {/* <Text style={styles.bText}>Bakka<Text style={{color: "#AF7BE5",}}>Coin</Text></Text> */}
-        {/* <Button>Click</Button> */}
+            <TouchableWithoutFeedback onPress={() => navigation.navigate("Home")}>
+                <Image source={require('../static/img/dArrow.png')} style={styles.logo} />
+            </TouchableWithoutFeedback>
+            <Text>{Navn}</Text>
       </SafeAreaView>
     );
 }

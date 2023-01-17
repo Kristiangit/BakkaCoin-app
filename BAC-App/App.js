@@ -6,6 +6,8 @@ import Login from './src/screens/LoginScreen.js'
 import Home from './src/screens/HomeScreen.js'
 import TestScreen from './src/screens/TestScreen.js'
 import Unavailable from './src/screens/Unavailable.js'
+import Profile from './src/screens/ProfileScreen.js'
+import Chat from './src/screens/ChatScreen.js'
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +22,8 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Feed" component={Unavailable} />
         <Stack.Screen name="Spill" component={Unavailable} />
-        <Stack.Screen name="Profil" component={TestScreen} />
+        <Stack.Screen name="Profil" component={Profile} />
+        <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="Test" component={TestScreen} />
       </Stack.Navigator>
     </NavigationContainer>

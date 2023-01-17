@@ -1,51 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback, ScrollView, Image, SafeAreaView } from 'react-native';
 import Navbar from '../components/Navbar';
+import TestNavbar from '../components/TestNavbar';
 import Footer from '../components/Footer';
 
-// const Fetchs = () => {
-//   fetch('https://localhost:3000',);
-// }
+const conLogger = () => {
+    console.log("lol")
+}
 
-export default function Home({ navigation }) {
+export default function Profile({ navigation }) {
 
   return (
     <SafeAreaView style={{height:'100%', backgroundColor: '#27272A', }}>
-        <Navbar />
+        <TestNavbar navigation={navigation}/>
         <View style={{width: '100%', height: '100%', flex: 1, }}>
           <ScrollView contentContainerStyle={styles.scrollContainer} style={{flex:1, backgroundColor: 'black',}}>
-            <View style={{flex: 1, alignItems:'center', margin:25,}}>
-              <Text style={{color:"white", fontSize:16}}>Du har:</Text>
-              <Text style={styles.bTitle}>1 000 000 BAC</Text>
-              {/* <Text style={styles.Title}>BAC</Text> */}
+            <View style={{flex: 1, alignItems:'center', margin: 25,}}>
+              <Text style={{color:"white", fontSize:16}}>Hei, <Text style={{fontWeight:"bold", color:"#501bb8" }}>Test!</Text></Text>
             </View>
             <View style={styles.darkBubble}>
-              <Text style={styles.Title}>Historikk</Text>
+              <Text style={styles.Title}>Test Testeren</Text>
               <View style={styles.dBubble}>
-                <Usertab Navn="TestBruker"/>
-                <Usertab Navn="TestBruker"/>
-                <Usertab Navn="TestBruker"/>
-                <Usertab Navn="TestBruker"/>
-                <Usertab Navn="TestBruker"/>
+                <Usertab Navn="Innstillinger" Funct={conLogger}/>
+                <Usertab Navn="Om BAC"/>
+                <Usertab Navn="Hjelp og kundeservice"/>
+                <Usertab Navn="Logg ut"/>
+                <Usertab Navn="Slett bruker"/>
               </View>
             </View>
 
             <View style={{height: 130,}}></View>
           </ScrollView>
-          <View style={styles.HotBubble}>
-              <TouchableWithoutFeedback style={{flex: 1}}>
-                <View style= {{flex: 1, alignItems: 'center'}}>
-                  <Image source={require('../static/img/dArrow.png')} style={[styles.arrow, {transform: [{rotateX: '180deg'}]}]}/>
-                  <Text style={hotbar}>Sende</Text>
-                </View>
-              </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback style={{flex: 1}}>
-                <View style= {{flex: 1, alignItems: 'center'}}>
-                  <Image source={require('../static/img/dArrow.png')} style={styles.arrow}/>
-                  <Text style={hotbar}>Be om</Text>
-                </View>
-              </TouchableWithoutFeedback>
-          </View>
         </View>
         <Footer navigation={navigation}/>
     </SafeAreaView>
@@ -126,19 +111,11 @@ const styles = StyleSheet.create({
   },
 });
 
-let hotbar = {color: "white", fontSize: 14,}
-const Usertab = ({Navn}) => {
+const Usertab = ({Navn}, {Funct}) => {
   return(
-    <TouchableWithoutFeedback onPress={() => navigation.navigate("Chat")} >
+    <TouchableWithoutFeedback onPress={Funct} >
       <View style={styles.textBubble}>
-        <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',}} >
-          <View>
-          {/* <Image /> */}
             <Text style={{fontWeight:'bold', }}>{Navn}</Text> 
-            {/* <Text>...</Text> */}
-          </View>
-          <Text>200 BAC</Text>
-        </View>
       </View>
     </TouchableWithoutFeedback>  
   );

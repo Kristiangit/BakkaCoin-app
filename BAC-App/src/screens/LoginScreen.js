@@ -8,17 +8,19 @@ export default function Login({ navigation }) {
       <SafeAreaView style={styles.container}>
         <Navbar />
         <View style={styles.inContainer}>
+          <View></View>
           <View style={styles.mainBubble}>
-            <Text>Logg inn:</Text>
-            <TextInput style={styles.inpBubble} placeholder="E-post"></TextInput>
-            <TextInput style={styles.inpBubble} placeholder="Passord"></TextInput>
-
-            
+            <Text style={{fontWeight:"bold", fontSize:16,}}>Logg inn:</Text>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('SignUp')}>
+              <Text style={styles.linkText}>eller lage ny bruker?</Text>
+            </TouchableWithoutFeedback>
+            <TextInput style={styles.inpBubble} placeholder="E-post" value="Testerson@mail.com"></TextInput>
+            <TextInput style={styles.inpBubble} placeholder="Passord" secureTextEntry={true} value="dajobdaod"></TextInput>
           </View>
 
           <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')} >
-            <View style={styles.mainBubble}>
-              <Text>Login!</Text>
+            <View style={styles.darkBubble}>
+              <Text style={styles.bTitle}>Logg inn!</Text>
             </View>
           </TouchableWithoutFeedback>
           {/* <View></View> */}
@@ -45,10 +47,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   mainBubble: {
-    backgroundColor: "#fffff",
+    backgroundColor: "#ffffff",
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 25,
+    justifyContent: 'space-evenly',
+    paddingHorizontal: 20,
     paddingVertical : 50,
     borderRadius: "30%",
     maxWidth: '100%',
@@ -70,18 +72,18 @@ const styles = StyleSheet.create({
   },
   darkBubble: {
     alignItems: 'center',
-    justifyContent: 'space-between',
-    margin: -50,
-    borderRadius: 12,
-    borderColor: '#461E71',
-    borderWidth: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#461E71',
+    borderRadius: '30%',
+    borderColor: '#27272A',
+    borderWidth: 4,
     maxWidth: '75%',
   },
   bTitle: {
   color: "white", 
   fontWeight:'bold',
-  fontSize: 24,
-  marginBottom: 9,
+  fontSize: 20,
   },
   Title: {
   color: "white", 
@@ -90,6 +92,10 @@ const styles = StyleSheet.create({
   border: {
     borderWidth: 5,
     borderColor: "#352349",
+  },
+  linkText: {
+    color: "#501bb8",
+    fontSize: 14,
   }
   
 });

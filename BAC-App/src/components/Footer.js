@@ -7,10 +7,9 @@ export default function Footer({ navigation }) {
   return (
       <SafeAreaView style={styles.footer}>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')}><Image source={require('../static/img/home-sym.png')} style={styles.logo}/></TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Feed')}><Image source={require('../static/img/feed.png')} style={styles.prof}/></TouchableWithoutFeedback>
+        {/* <TouchableWithoutFeedback onPress={() => navigation.navigate('Feed')}><Image source={require('../static/img/feed.png')} style={styles.prof}/></TouchableWithoutFeedback> */}
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Spill')}><Image source={require('../static/img/Controller.png')} style={styles.logo}/></TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Profil')}><Image source={require('../static/img/profile.png')} style={styles.logo}/></TouchableWithoutFeedback>
-        {/* <Text style={styles.bText}>Bakka<Text style={{color: "#AF7BE5",}}>Coin</Text></Text> */}
     </SafeAreaView>
   );
 }
