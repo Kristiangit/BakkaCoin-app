@@ -1,9 +1,63 @@
+import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Touchable, TouchableWithoutFeedback, TextInput, SafeAreaView } from 'react-native';
 import Navbar from '../components/Navbar';
 
+const LoginFetch = (props) => {
+  console.log("test")
+  const [error, setError] = useState()
+  const handleSubmit = data => {
+    //const json = JSON.stringify(data, null, 4);
+    //console.clear();
+    //console.log(json);
+
+    // Setter opp headers
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json")
+
+      fetch("http://127.0.0.1:5000/login", {
+      //fetch("https://bakkacoin.no/login", {
+          "method" : "POST",
+          "headers": headers,
+          "body": JSON.stringify({
+              "mail": props.mail,
+              "password": props.password,
+          }) // et javascript-object kan vi gjøre til JSON med json-stringify
+      }).then(function(response) {
+          // Håndterer responsen
+          // Vi henter ut json-bodyen i responsen med .json()
+        response.json().then(function(json) {
+          //let array = response
+          //console.log(response)
+          if (json.token == "bad"){
+            setError("Feil brukernavn eller passord")
+            //alert("oops, feil brukernavn eller passord")
+          }
+          else if(json.token == "feil mail"){
+            //console.log("feil ")
+            setError("Feil brukernavn eller passord")
+            //alert("oops, feil brukernavn eller passord")
+          }
+          else{
+            //console.log(json.token)
+            var now = new Date().getTime();
+            localStorage.setItem("jwt-token", json.token);
+            localStorage.setItem("isAuth", true);
+            localStorage.setItem('setupTime', now)
+            const token = localStorage.getItem('jwt-token')
+            
+            //console.log(token)
+            }
+          })
+        });
+        console.log(error)
+      }
+
+}
 
 export default function Login({ navigation }) {
+  const [textMail, onChangeMail] = useState('');
+  const [passWord, onChangePass] = useState('');
   return (
       <SafeAreaView style={styles.container}>
         <Navbar />
@@ -14,11 +68,11 @@ export default function Login({ navigation }) {
             <TouchableWithoutFeedback onPress={() => navigation.navigate('SignUp')}>
               <Text style={styles.linkText}>eller lage ny bruker?</Text>
             </TouchableWithoutFeedback>
-            <TextInput style={styles.inpBubble} placeholder="E-post" value="Testerson@mail.com"></TextInput>
-            <TextInput style={styles.inpBubble} placeholder="Passord" secureTextEntry={true} value="dajobdaod"></TextInput>
+            <TextInput style={styles.inpBubble} placeholder="E-post" value={textMail} onChangeText={onChangeMail} />
+            <TextInput style={styles.inpBubble} placeholder="Passord" secureTextEntry={true} value={passWord} onChangeText={onChangePass} />
           </View>
 
-          <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')} >
+          <TouchableWithoutFeedback onPress={LoginFetch(mail=textMail, password=passWord)} >
             <View style={styles.darkBubble}>
               <Text style={styles.bTitle}>Logg inn!</Text>
             </View>

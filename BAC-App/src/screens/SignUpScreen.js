@@ -20,7 +20,7 @@ export default function SignUp({ navigation }) {
 
           </View>
 
-          <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')} >
+          <TouchableWithoutFeedback onPress={() => navigation.navigate('Test')} >
             <View style={styles.darkBubble}>
               <Text style={styles.bTitle}>Lag en ny bruker!</Text>
             </View>
@@ -99,6 +99,4 @@ const styles = StyleSheet.create({
     color: "#501bb8",
     fontSize: 14,
   }
-  
 });
-
