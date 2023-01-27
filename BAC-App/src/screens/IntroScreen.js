@@ -27,6 +27,11 @@ export default function Intro({ navigation }) {
               <Text style={styles.Title}>Logg inn!</Text>
             </View>
           </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')}>
+            <View style={styles.textBubble}>
+              <Text style={styles.Title}>Home!</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
 
         <View></View>

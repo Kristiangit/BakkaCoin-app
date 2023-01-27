@@ -1,12 +1,9 @@
 import { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Touchable, TouchableWithoutFeedback, TextInput, SafeAreaView } from 'react-native';
 import Navbar from '../components/Navbar';
 
 const LoginFetch = (props) => {
-  console.log("test")
-  const [error, setError] = useState()
-  const handleSubmit = data => {
+  let error
     //const json = JSON.stringify(data, null, 4);
     //console.clear();
     //console.log(json);
@@ -16,12 +13,11 @@ const LoginFetch = (props) => {
     headers.append("Content-Type", "application/json")
 
       fetch("http://127.0.0.1:5000/login", {
-      //fetch("https://bakkacoin.no/login", {
           "method" : "POST",
           "headers": headers,
           "body": JSON.stringify({
-              "mail": props.mail,
-              "password": props.password,
+              "mail": props.mailInput,
+              "password": props.passInput,
           }) // et javascript-object kan vi gjøre til JSON med json-stringify
       }).then(function(response) {
           // Håndterer responsen
@@ -51,13 +47,13 @@ const LoginFetch = (props) => {
           })
         });
         console.log(error)
-      }
+      };
 
-}
+
 
 export default function Login({ navigation }) {
-  const [textMail, onChangeMail] = useState('');
-  const [passWord, onChangePass] = useState('');
+  const [mailInput, onChangeMail] = useState('');
+  const [passInput, onChangePass] = useState('');
   return (
       <SafeAreaView style={styles.container}>
         <Navbar />
@@ -68,11 +64,11 @@ export default function Login({ navigation }) {
             <TouchableWithoutFeedback onPress={() => navigation.navigate('SignUp')}>
               <Text style={styles.linkText}>eller lage ny bruker?</Text>
             </TouchableWithoutFeedback>
-            <TextInput style={styles.inpBubble} placeholder="E-post" value={textMail} onChangeText={onChangeMail} />
-            <TextInput style={styles.inpBubble} placeholder="Passord" secureTextEntry={true} value={passWord} onChangeText={onChangePass} />
+            <TextInput style={styles.inpBubble} placeholder="E-post" value={mailInput} onChangeText={onChangeMail} />
+            <TextInput style={styles.inpBubble} placeholder="Passord" secureTextEntry={true} value={passInput} onChangeText={onChangePass} />
           </View>
 
-          <TouchableWithoutFeedback onPress={LoginFetch(mail=textMail, password=passWord)} >
+          <TouchableWithoutFeedback onPress={() => LoginFetch(mail=mailInput, pass=passInput)} >
             <View style={styles.darkBubble}>
               <Text style={styles.bTitle}>Logg inn!</Text>
             </View>
@@ -106,7 +102,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     paddingHorizontal: 20,
     paddingVertical : 50,
-    borderRadius: "30%",
+    borderRadius: parseFloat("30%"),
     maxWidth: '100%',
     borderColor: '#461E71',
     borderWidth: 3,
@@ -120,7 +116,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: "#27272A",
     borderWidth: 3,
-    borderRadius: '30%',
+    borderRadius: parseFloat("30%"),
     maxWidth: '100%',
     margin: 25,
   },
@@ -129,7 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 20,
     backgroundColor: '#461E71',
-    borderRadius: '30%',
+    borderRadius: parseFloat("30%"),
     borderColor: '#27272A',
     borderWidth: 4,
     maxWidth: '75%',

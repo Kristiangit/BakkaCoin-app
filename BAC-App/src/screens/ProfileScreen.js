@@ -4,8 +4,16 @@ import Navbar from '../components/Navbar';
 import TestNavbar from '../components/TestNavbar';
 import Footer from '../components/Footer';
 
-const conLogger = () => {
+const conLogger = (lol) => {
+  if (lol){
+    console.log(lol)
+  }
+  else {
     console.log("lol")
+  }
+}
+const SignOut = (navigation) => {
+  navigation.navigate("Intro")
 }
 
 export default function Profile({ navigation }) {
@@ -21,10 +29,10 @@ export default function Profile({ navigation }) {
             <View style={styles.darkBubble}>
               <Text style={styles.Title}>Test Testeren</Text>
               <View style={styles.dBubble}>
-                <Usertab Navn="Innstillinger" Funct={conLogger}/>
-                <Usertab Navn="Om BAC"/>
+                <Usertab Navn="Innstillinger" handlePress={() => conLogger("wow")}/>
+                <Usertab Navn="Om BAC" handlePress={() => conLogger()}/>
                 <Usertab Navn="Hjelp og kundeservice"/>
-                <Usertab Navn="Logg ut"/>
+                <Usertab Navn="Logg ut" handlePress={() => SignOut(navigation)}/>
                 <Usertab Navn="Slett bruker"/>
               </View>
             </View>
@@ -111,11 +119,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Usertab = ({Navn}, {Funct}) => {
+const Usertab = (props) => {
   return(
-    <TouchableWithoutFeedback onPress={Funct} >
+    <TouchableWithoutFeedback onPress={props.handlePress} >
       <View style={styles.textBubble}>
-            <Text style={{fontWeight:'bold', }}>{Navn}</Text> 
+            <Text style={{fontWeight:'bold', }}>{props.Navn}</Text> 
       </View>
     </TouchableWithoutFeedback>  
   );
