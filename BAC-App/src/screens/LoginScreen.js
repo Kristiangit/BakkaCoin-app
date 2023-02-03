@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button, Touchable, TouchableWithoutFeedback, TextInput, SafeAreaView } from 'react-native';
 import Navbar from '../components/Navbar';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginFetch = (props) => {
-  let error
+  const navigation = useNavigation();
+  let error = "notin";
     //const json = JSON.stringify(data, null, 4);
     //console.clear();
     //console.log(json);
@@ -12,12 +15,12 @@ const LoginFetch = (props) => {
     const headers = new Headers();
     headers.append("Content-Type", "application/json")
 
-      fetch("http://127.0.0.1:5000/login", {
+      fetch("http://localhost:3000/api/login", {
           "method" : "POST",
           "headers": headers,
           "body": JSON.stringify({
-              "mail": props.mailInput,
-              "password": props.passInput,
+              "mail": mail,
+              "password": pass,
           }) // et javascript-object kan vi gjøre til JSON med json-stringify
       }).then(function(response) {
           // Håndterer responsen
@@ -41,19 +44,67 @@ const LoginFetch = (props) => {
             localStorage.setItem("isAuth", true);
             localStorage.setItem('setupTime', now)
             const token = localStorage.getItem('jwt-token')
+            console.log(token)
             
-            //console.log(token)
             }
           })
         });
         console.log(error)
+        navigation.navigate('Home');
       };
-
+    
 
 
 export default function Login({ navigation }) {
-  const [mailInput, onChangeMail] = useState('');
-  const [passInput, onChangePass] = useState('');
+  const [mailInput, onChangeMail] = useState();
+  const [passInput, onChangePass] = useState();
+  const [error, setError] = useState();
+
+  const handleSubmit = () => {
+    console.log(mailInput)
+    console.log(passInput)
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json")
+      fetch("http://localhost:3000/api/login", {
+          "method" : "POST",
+          "headers": headers,
+          "body": JSON.stringify({
+              "mail": mailInput,
+              "password": passInput,
+          }) // et javascript-object kan vi gjøre til JSON med json-stringify
+      }).then(function(response) {
+          // Håndterer responsen
+          // Vi henter ut json-bodyen i responsen med .json()
+        response.json().then(function(json) {
+          //let array = response
+          //console.log(response)
+          if (json.token == "bad"){
+            setError("Feil brukernavn eller passord")
+            //alert("oops, feil brukernavn eller passord")
+          }
+          else if(json.token == "feil mail"){
+            //console.log("feil ")
+            setError("Feil brukernavn eller passord")
+            //alert("oops, feil brukernavn eller passord")
+          }
+          else{
+            //console.log(json.token)
+            var now = new Date().getTime();
+            AsyncStorage.setItem("jwt-token", json.token);
+            AsyncStorage.setItem("isAuth", true);
+            AsyncStorage.setItem('setupTime', now)
+            const token = AsyncStorage.getItem('jwt-token')
+            const token2 = AsyncStorage.getItem('isAuth')
+            const token3 = AsyncStorage.getItem('setupTime')
+            console.log(token, "lodas", token2, "teh", token3)
+            
+            };
+          })
+        });
+        console.log(error)
+        navigation.navigate('Home');
+      };
+
   return (
       <SafeAreaView style={styles.container}>
         <Navbar />
@@ -68,7 +119,7 @@ export default function Login({ navigation }) {
             <TextInput style={styles.inpBubble} placeholder="Passord" secureTextEntry={true} value={passInput} onChangeText={onChangePass} />
           </View>
 
-          <TouchableWithoutFeedback onPress={() => LoginFetch(mail=mailInput, pass=passInput)} >
+          <TouchableWithoutFeedback onPress={() => handleSubmit()}>
             <View style={styles.darkBubble}>
               <Text style={styles.bTitle}>Logg inn!</Text>
             </View>
@@ -77,7 +128,7 @@ export default function Login({ navigation }) {
         </View>
       </SafeAreaView>
   );
-}
+};
 
 
 const styles = StyleSheet.create({

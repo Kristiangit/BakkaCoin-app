@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, Button, Touchable, TouchableWithoutFeedback, TextInput, SafeAreaView } from 'react-native';
 import Navbar from '../components/Navbar';
 
+
 const SignupFetch = ({props} )=> {
   let error = "notin"
   
@@ -14,10 +15,7 @@ const SignupFetch = ({props} )=> {
     // Setter opp headers
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
-    console.log(mail);
-    console.log(pass);
-    console.log(repPass);
-      fetch("http://127.0.0.1:5000/api/reg", {
+      fetch("http://localhost:3000/api/reg", {
         "method" : "POST",
         "headers": headers,
         "body": JSON.stringify({
@@ -36,17 +34,17 @@ const SignupFetch = ({props} )=> {
           } else {
             error ="lold";
             var now = new Date().getTime();
-            localStorage.setItem("jwt-token", json.token);
-            localStorage.setItem("isAuth", true);
-            localStorage.setItem('setupTime', now);
-            const token = localStorage.getItem('jwt-token');
-            console.log(token);
+            // localStorage.setItem("jwt-token", json.token);
+            // localStorage.setItem("isAuth", true);
+            // localStorage.setItem('setupTime', now);
+            // const token = localStorage.getItem('jwt-token');
+            // console.log(token);
           };    
         });
       });
     };
     console.log(error, "is tha error");
-    // navigation.navigate('Home');
+    navigation.navigate('Home');
   };
 
 export default function SignUp({ navigation }) {
@@ -69,7 +67,7 @@ export default function SignUp({ navigation }) {
 
           </View>
 
-          <TouchableWithoutFeedback onPress={() => SignupFetch(mail=mailInput, pass=passInput, repPass=repPassInput)} >
+          <TouchableWithoutFeedback onPress={() => SignupFetch(mail=mailInput, pass=passInput, repPass=repPassInput, navigation=navigation)} >
             <View style={styles.darkBubble}>
               <Text style={styles.bTitle}>Lag en ny bruker!</Text>
             </View>
