@@ -4,56 +4,17 @@ import Navbar from '../components/Navbar';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const LoginFetch = (props) => {
-  const navigation = useNavigation();
-  let error = "notin";
-    //const json = JSON.stringify(data, null, 4);
-    //console.clear();
-    //console.log(json);
-
-    // Setter opp headers
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json")
-
-      fetch("http://localhost:3000/api/login", {
-          "method" : "POST",
-          "headers": headers,
-          "body": JSON.stringify({
-              "mail": mail,
-              "password": pass,
-          }) // et javascript-object kan vi gjøre til JSON med json-stringify
-      }).then(function(response) {
-          // Håndterer responsen
-          // Vi henter ut json-bodyen i responsen med .json()
-        response.json().then(function(json) {
-          //let array = response
-          //console.log(response)
-          if (json.token == "bad"){
-            setError("Feil brukernavn eller passord")
-            //alert("oops, feil brukernavn eller passord")
-          }
-          else if(json.token == "feil mail"){
-            //console.log("feil ")
-            setError("Feil brukernavn eller passord")
-            //alert("oops, feil brukernavn eller passord")
-          }
-          else{
-            //console.log(json.token)
-            var now = new Date().getTime();
-            localStorage.setItem("jwt-token", json.token);
-            localStorage.setItem("isAuth", true);
-            localStorage.setItem('setupTime', now)
-            const token = localStorage.getItem('jwt-token')
-            console.log(token)
-            
-            }
-          })
-        });
-        console.log(error)
-        navigation.navigate('Home');
-      };
-    
-
+const LoginSuccess = async (navigation, json) => {
+    var now = new Date().getTime();
+    await AsyncStorage.setItem("jwt-token", JSON.stringify(json.token));
+    await AsyncStorage.setItem("isAuth", JSON.stringify(true));
+    await AsyncStorage.setItem('setupTime', JSON.stringify(now));
+    const token = AsyncStorage.getItem('jwt-token');
+    const test = AsyncStorage.getItem('isAuth');
+    console.log(JSON.stringify(test), "aga")
+    console.log(JSON.stringify(true), "oa");
+    navigation.navigate('Home');
+};
 
 export default function Login({ navigation }) {
   const [mailInput, onChangeMail] = useState();
@@ -88,21 +49,22 @@ export default function Login({ navigation }) {
             //alert("oops, feil brukernavn eller passord")
           }
           else{
+            LoginSuccess(navigation, json);
+
             //console.log(json.token)
-            var now = new Date().getTime();
-            AsyncStorage.setItem("jwt-token", json.token);
-            AsyncStorage.setItem("isAuth", true);
-            AsyncStorage.setItem('setupTime', now)
-            const token = AsyncStorage.getItem('jwt-token')
-            const token2 = AsyncStorage.getItem('isAuth')
-            const token3 = AsyncStorage.getItem('setupTime')
-            console.log(token, "lodas", token2, "teh", token3)
-            
+            // var now = new Date().getTime();
+            // AsyncStorage.setItem("jwt-token", json.token);
+            // AsyncStorage.setItem("isAuth", true);
+            // AsyncStorage.setItem('setupTime', now)
+            // const token = AsyncStorage.getItem('jwt-token')
+            // const token2 = AsyncStorage.getItem('isAuth')
+            // const token3 = AsyncStorage.getItem('setupTime')
+            // console.log(token, "lodas", token2, "teh", token3)
+            // navigation.navigate('Home');
             };
           })
         });
-        console.log(error)
-        navigation.navigate('Home');
+        console.log(error, "eeerror")
       };
 
   return (

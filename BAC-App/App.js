@@ -1,13 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Intro from './src/screens/IntroScreen.js'
-import SignUp from './src/screens/SignUpScreen.js'
-import Login from './src/screens/LoginScreen.js'
-import Home from './src/screens/HomeScreen.js'
-import TestScreen from './src/screens/TestScreen.js'
-import Unavailable from './src/screens/Unavailable.js'
-import Profile from './src/screens/ProfileScreen.js'
-import Chat from './src/screens/ChatScreen.js'
+import Intro from './src/screens/IntroScreen.js';
+import SignUp from './src/screens/SignUpScreen.js';
+import Login from './src/screens/LoginScreen.js';
+import Home from './src/screens/HomeScreen.js';
+import TestScreen from './src/screens/TestScreen.js';
+import Unavailable from './src/screens/Unavailable.js';
+import Profile from './src/screens/ProfileScreen.js';
+import Chat from './src/screens/ChatScreen.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,5 +28,5 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
