@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, ScrollView, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, ScrollView, Image, SafeAreaView, TextInput } from 'react-native';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -7,7 +7,29 @@ import Footer from '../components/Footer';
 //   fetch('https://localhost:3000',);
 // }
 
+
+
+// const SearchMenu = (srchmsg) => {
+
+//   const [search, setSearch] = useState("");
+//   const updateSearch = (search) => {
+//     setSearch(search);
+//   };
+  
+
+//   return (
+//     <View>
+//       <SearchBar value={search} onChangeText={updateSearch} ></SearchBar>
+//       {/* <TextInput style placeholder={srchmsg} value={textInput} onChangeText={onChangeText}></TextInput> */}
+//       <View>
+      
+//       </View>
+//     </View>
+//   );
+// }
+
 export default function Home({ navigation }) {
+  
 
   return (
     <SafeAreaView style={{height:'100%', backgroundColor: '#27272A', }}>
@@ -33,13 +55,13 @@ export default function Home({ navigation }) {
             <View style={{height: 130,}}></View>
           </ScrollView>
           <View style={styles.HotBubble}>
-              <TouchableWithoutFeedback style={{flex: 1}}>
+              <TouchableWithoutFeedback style={{flex: 1}} onPress={() => navigation.navigate("Search")}>
                 <View style= {{flex: 1, alignItems: 'center'}}>
                   <Image source={require('../static/img/dArrow.png')} style={[styles.arrow, {transform: [{rotateX: '180deg'}]}]}/>
                   <Text style={hotbar}>Sende</Text>
                 </View>
               </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback style={{flex: 1}}>
+              <TouchableWithoutFeedback style={{flex: 1}} onPress={() => navigation.navigate("Search")}>
                 <View style= {{flex: 1, alignItems: 'center'}}>
                   <Image source={require('../static/img/dArrow.png')} style={styles.arrow}/>
                   <Text style={hotbar}>Be om</Text>
@@ -67,8 +89,9 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: parseFloat("50%"),
     width: 250,
-    height: 50,
-    opacity: 0.75
+    height: 70,
+    opacity: 0.75,
+    margin: 10,
   },  
   HotBubble: {
     flex:1,

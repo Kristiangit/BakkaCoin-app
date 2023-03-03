@@ -8,6 +8,8 @@ import TestScreen from './src/screens/TestScreen.js';
 import Unavailable from './src/screens/Unavailable.js';
 import Profile from './src/screens/ProfileScreen.js';
 import Chat from './src/screens/ChatScreen.js';
+import Search from './src/screens/SearchScreen.js';
+import Send from './src/screens/SendScreen.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +26,8 @@ export default function App() {
         <Stack.Screen name="Spill" component={Unavailable} />
         <Stack.Screen name="Profil" component={Profile} />
         <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen name="Search" component={Search} options={{gestureDirection: "vertical"}} />
+        <Stack.Screen name="Send" component={Send} options={{animation: "none"}} />
         <Stack.Screen name="Test" component={TestScreen} />
       </Stack.Navigator>
     </NavigationContainer>

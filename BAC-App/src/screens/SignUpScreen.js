@@ -2,14 +2,13 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, Button, Touchable, TouchableWithoutFeedback, TextInput, SafeAreaView } from 'react-native';
 import Navbar from '../components/Navbar';
 
-const Success = async (navigation, json) => {
+const Success = async (navigation ) => {
   var now = new Date().getTime();
-  await AsyncStorage.setItem("jwt-token", JSON.stringify(json.token));
-  await AsyncStorage.setItem("isAuth", JSON.stringify(true));
-  await AsyncStorage.setItem('setupTime', JSON.stringify(now));
-  const token = AsyncStorage.getItem('jwt-token');
-  console.log(JSON.stringify(json), "oga")
-  console.log(token, "aga")
+  const token = ["jwt-token", JSON.stringify("json.token")];
+  const auth = ["isAuth", JSON.stringify(true)];
+  const setup = ["setupTime", JSON.stringify(now)];
+  await AsyncStorage.multiSet([token, auth, setup]);
+  // console.log(await AsyncStorage.multiGet([token[0], auth[0], setup[0]]));
   navigation.navigate('Home');
 };
 

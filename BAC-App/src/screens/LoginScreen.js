@@ -47,17 +47,6 @@ export default function Login({ navigation }) {
           }
           else{
             LoginSuccess(navigation, json);
-
-            //console.log(json.token)
-            // var now = new Date().getTime();
-            // AsyncStorage.setItem("jwt-token", json.token);
-            // AsyncStorage.setItem("isAuth", true);
-            // AsyncStorage.setItem('setupTime', now)
-            // const token = AsyncStorage.getItem('jwt-token')
-            // const token2 = AsyncStorage.getItem('isAuth')
-            // const token3 = AsyncStorage.getItem('setupTime')
-            // console.log(token, "lodas", token2, "teh", token3)
-            // navigation.navigate('Home');
             };
           })
         });

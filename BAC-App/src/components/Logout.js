@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ClearStorage = async() => {
-    const keys = 
+    const keys = ["jwt-token", "setupTime"];
     await AsyncStorage.setItem("isAuth", false);
     await AsyncStorage.multiRemove([keys]);
     
