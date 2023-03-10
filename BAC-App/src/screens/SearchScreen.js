@@ -3,14 +3,14 @@ import { SafeAreaView, Text, StyleSheet, View, FlatList, TextInput, } from 'reac
 import { useNavigation } from '@react-navigation/native';
 import Navbar from '../components/Navbar';
 
-const Search = ({navigation}) => {
+const Search = ({route, navigation}) => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
   
-  
+  const { send } = route.params;
   const navi = (item) => {
-    navigation.push("Send", {send:true, id:item.id})
+    navigation.navigate("Send", {send:send, id:item.id})
   }
 
   useEffect(() => {

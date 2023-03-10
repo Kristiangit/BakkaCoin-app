@@ -55,13 +55,13 @@ export default function Home({ navigation }) {
             <View style={{height: 130,}}></View>
           </ScrollView>
           <View style={styles.HotBubble}>
-              <TouchableWithoutFeedback style={{flex: 1}} onPress={() => navigation.navigate("Search")}>
+              <TouchableWithoutFeedback style={{flex: 1}} onPress={() => navigation.navigate("Search", {send: true})}>
                 <View style= {{flex: 1, alignItems: 'center'}}>
                   <Image source={require('../static/img/dArrow.png')} style={[styles.arrow, {transform: [{rotateX: '180deg'}]}]}/>
                   <Text style={hotbar}>Sende</Text>
                 </View>
               </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback style={{flex: 1}} onPress={() => navigation.navigate("Search")}>
+              <TouchableWithoutFeedback style={{flex: 1}} onPress={() => navigation.navigate("Search", {send: false})}>
                 <View style= {{flex: 1, alignItems: 'center'}}>
                   <Image source={require('../static/img/dArrow.png')} style={styles.arrow}/>
                   <Text style={hotbar}>Be om</Text>

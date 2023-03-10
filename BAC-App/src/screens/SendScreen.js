@@ -1,31 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, ScrollView, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Image, SafeAreaView, TextInput } from 'react-native';
 import Navbar from '../components/Navbar';
 import TestNavbar from '../components/TestNavbar';
 import Footer from '../components/Footer';
 
-export default function Send({ navigation }) {
+export default function Send({ route, navigation }) {
+  const [penger, setPenger] = useState("");
 
+  const onChangePenger = (text) => {
+    console.log(text)
+    console.log(+text)
+    console.log(isNaN(+text), "check")
+    if (!isNaN(+text) && text != " ") {
+      console.log("bad")
+      setPenger(text.trim());
+      // console.log(penger, " ", text)
+    }else {
+    };
+};
+  
 
+  const { send, id } = route.params;
 
   return (
     <SafeAreaView style={{height:'100%', backgroundColor: '#27272A', }}>
         <Navbar />
-        <View style={{width: '100%', height: '100%', flex: 1, }}>
+        <View style={{width: '100%', height: '100%', flex: 1}}>
           <View contentContainerStyle={styles.scrollContainer} style={{flex:1, backgroundColor: 'black',}}>
-            <View style={{flex: 1, alignItems:'center', margin: 25,}}>
-              <Text style={{color:"white", fontSize:16}}>Hei, <Text style={{fontWeight:"bold", color:"#501bb8" }}>Test!</Text></Text>
+            <View style={{alignItems:'center', margin: 30}}>
+              <Text style={{color:"white", fontSize: 52, fontWeight:"bold"}}>Send <Text style={{color:"#501bb8" }}>BAC</Text></Text>
             </View>
             <View style={styles.darkBubble}>
-              <Text style={styles.Title}>Test Testeren</Text>
-              <View style={styles.dBubble}>
+              <TextInput style={{color:"white", fontSize: 36}} keyboardType='number-pad' placeholder="Penger" value={penger} onChangeText={onChangePenger} />
+              <View>
+                <Text style={{color:"white", }} >Tilgjengelig saldo: 0 BAC</Text>
               </View>
             </View>
+            <TouchableOpacity style={styles.HotBubble}>
+              <View>
 
-            <View style={{height: 130,}}></View>
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
-        <Footer navigation={navigation}/>
     </SafeAreaView>
   );
 }
@@ -49,19 +66,14 @@ const styles = StyleSheet.create({
     opacity: 0.75
   },  
   HotBubble: {
-    flex:1,
-    position: 'absolute',
-    flexDirection: 'row',
     backgroundColor: "#b07ce5",
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 15,
     borderRadius: parseFloat("50%"),
-    width: '60%',
-    maxWidth: '100%',
-    height: '11%',
-    bottom: 40,
+    width: 200,
+    height: 60,
     alignSelf: "center",
+    margin: 30,
   },
   darkBubble: {
     flex: 1,

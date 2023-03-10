@@ -17,10 +17,10 @@ export default function Login({ navigation }) {
   const [mailInput, onChangeMail] = useState();
   const [passInput, onChangePass] = useState();
   const [error, setError] = useState();
-
+  console.log(mailInput)
   const handleSubmit = () => {
-    console.log(mailInput)
-    console.log(passInput)
+    // console.log(mailInput)
+    // console.log(passInput)
     const headers = new Headers();
     headers.append("Content-Type", "application/json")
       fetch("http://localhost:3000/api/login", {
