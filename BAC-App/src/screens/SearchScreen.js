@@ -26,7 +26,7 @@ const Search = ({route, navigation}) => {
   }, []);
 
   const searchFilterFunction = (text) => {
-    if (text.length >= 4) {
+    if (text.length >= 3) {
       const newData = masterDataSource.filter(function (item) {
         // Applying filter for the inserted text in search bar
         const itemData = item.title

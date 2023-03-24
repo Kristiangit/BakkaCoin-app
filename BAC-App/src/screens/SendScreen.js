@@ -1,26 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Image, SafeAreaView, TextInput } from 'react-native';
 import Navbar from '../components/Navbar';
-import TestNavbar from '../components/TestNavbar';
-import Footer from '../components/Footer';
 
 export default function Send({ route, navigation }) {
   const [penger, setPenger] = useState("");
-
-  const onChangePenger = (text) => {
-    console.log(text)
-    console.log(+text)
-    console.log(isNaN(+text), "check")
-    if (!isNaN(+text) && text != " ") {
-      console.log("bad")
-      setPenger(text.trim());
-      // console.log(penger, " ", text)
-    }else {
-    };
-};
-  
-
+  const munny = +100; // hvor mye BAC bruker har
   const { send, id } = route.params;
+  
+  const onChangePenger = (text) => {
+    if (!isNaN(+text) && text != " ") {
+      setPenger(+text);
+    };
+  };
+  const confirmSend = () => {
+    // console.log(send, " hah ", id, penger, typeof penger)
+    if (penger > munny) {
+      alert("bad, you poor");
+      return
+    };
+    console.log("money sent")
+    navigation.navigate("Chat", {send:send, AccId:id})
+  };
+  const confirmAsk = () => {
+    // console.log(send, " hah ", id, penger, typeof penger)
+    console.log("money asked")
+    navigation.navigate("Chat", {send:send, AccId:id})
+  };
+
+  const ifSend = () => {
+    if (send) {
+      confirmSend();
+    } else if (!send){
+      confirmAsk();
+    }
+  }
+    
 
   return (
     <SafeAreaView style={{height:'100%', backgroundColor: '#27272A', }}>
@@ -33,10 +47,10 @@ export default function Send({ route, navigation }) {
             <View style={styles.darkBubble}>
               <TextInput style={{color:"white", fontSize: 36}} keyboardType='number-pad' placeholder="Penger" value={penger} onChangeText={onChangePenger} />
               <View>
-                <Text style={{color:"white", }} >Tilgjengelig saldo: 0 BAC</Text>
+                <Text style={{color:"white", fontWeight:"bold", }} >Tilgjengelig saldo: {munny} <Text style={{color:"#501bb8" }}>BAC</Text></Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.HotBubble}>
+            <TouchableOpacity style={styles.HotBubble} onPress={ifSend}>
               <View>
 
               </View>

@@ -1,4 +1,4 @@
-import { StyleSheet,  SafeAreaView, Image, TouchableWithoutFeedback} from 'react-native';
+import { StyleSheet,  SafeAreaView, Image, TouchableWithoutFeedback, Text} from 'react-native';
 // import { isIphoneWithNotch } from '../screens/IntroScreen'
 
 
