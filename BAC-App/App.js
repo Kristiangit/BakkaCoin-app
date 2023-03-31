@@ -25,9 +25,9 @@ export default function App() {
         <Stack.Screen name="Feed" component={Unavailable} />
         <Stack.Screen name="Spill" component={Unavailable} />
         <Stack.Screen name="Profil" component={Profile} />
-        <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="Search" component={Search} options={{gestureDirection: "vertical"}} />
         <Stack.Screen name="Send" component={Send} options={{animation: "none"}} />
+        <Stack.Screen name="Chat" component={Chat} /> 
         <Stack.Screen name="Test" component={TestScreen} />
       </Stack.Navigator>
     </NavigationContainer>

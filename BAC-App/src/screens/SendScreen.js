@@ -19,12 +19,12 @@ export default function Send({ route, navigation }) {
       return
     };
     console.log("money sent")
-    navigation.navigate("Chat", {send:send, AccId:id})
+    navigation.navigate("Chat", {send:send, AccountId:id, })
   };
   const confirmAsk = () => {
     // console.log(send, " hah ", id, penger, typeof penger)
     console.log("money asked")
-    navigation.navigate("Chat", {send:send, AccId:id})
+    navigation.navigate("Chat", {send:send, AccountId:id, })
   };
 
   const ifSend = () => {

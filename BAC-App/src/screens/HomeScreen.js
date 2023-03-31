@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback, ScrollView, Image, SafeAreaView, TextInput } from 'react-native';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useNavigation } from '@react-navigation/native';
 
 // const Fetchs = () => {
 //   fetch('https://localhost:3000',);
@@ -148,9 +149,11 @@ const styles = StyleSheet.create({
     tintColor: 'white'
   },
 });
+let hotbar = {color: "white", fontSize: 14}
 
-let hotbar = {color: "white", fontSize: 14,}
+
 const Usertab = ({Navn}) => {
+  const navigation = useNavigation();
   return(
     <TouchableWithoutFeedback onPress={() => navigation.navigate("Chat")} >
       <View style={styles.textBubble}>

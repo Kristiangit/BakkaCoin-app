@@ -1,16 +1,18 @@
+import { useNavigation } from '@react-navigation/native';
 import { StyleSheet,  SafeAreaView, Image, TouchableWithoutFeedback, Text} from 'react-native';
-// import { isIphoneWithNotch } from '../screens/IntroScreen'
 
 
 
-export default function Chatbar({ Navn, navigation }) {
-    return (
-        <SafeAreaView style={styles.navbar}>
-            <TouchableWithoutFeedback onPress={() => navigation.navigate("Home")}>
-                <Image source={require('../static/img/dArrow.png')} style={styles.logo} />
-            </TouchableWithoutFeedback>
-            <Text>{Navn}</Text>
-      </SafeAreaView>
+export default function Chatbar({ Navn }) {
+  const navigation = useNavigation();
+
+  return (
+    <SafeAreaView style={styles.navbar}>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Home")}>
+        <Image source={require('../static/img/dArrow.png')} style={styles.logo} />
+      </TouchableWithoutFeedback>
+      <Text>{Navn}</Text>
+    </SafeAreaView>
     );
 }
 
@@ -37,3 +39,4 @@ const styles = StyleSheet.create({
       maxWidth: 38,
     },
   });
+

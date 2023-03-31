@@ -6,25 +6,54 @@ import Footer from '../components/Footer';
 
 
 export default function Chat({ navigation, Navn }) {
+
   return (
     <SafeAreaView style={{height:'100%', backgroundColor: '#27272A', }}>
-        <Chatbar navigation={navigation} Navn={Navn}/>
-        <View style={{width: '100%', height: '100%', flex: 1, }}>
-          <ScrollView contentContainerStyle={styles.scrollContainer} style={{flex:1, backgroundColor: 'black',}}>
-            <View style={{flex: 1, alignItems:'center', margin: 25,}}>
-              <Text style={{color:"white", fontSize:16}}>Hei, <Text style={{fontWeight:"bold", color:"#501bb8" }}>Test!</Text></Text>
+      <Chatbar Navn={Navn}/>
+      <View style={{width: '100%', height: '100%', flex: 49, }}>
+        <ScrollView contentContainerStyle={styles.scrollContainer} style={{flex:1, backgroundColor: "black",}}>
+          <View style={styles.darkBubble}>
+            <View style={styles.dBubble}>
+              <Text style={{color:"#b07ce5", fontWeight: 'bold'}}>20 BAC</Text>
             </View>
+            <View style={{flex: 1,}}></View>
+          </View>
+
+          <View>
             <View style={styles.darkBubble}>
-              <Text style={styles.Title}>Test Testersen</Text>
               <View style={styles.dBubble}>
-                <Usertab Navn="BAC"/>
+                <Text style={{color:"#b07ce5", fontWeight: 'bold'}}>40 BAC</Text>
+              </View>
+              <View style={{flex: 1,}}></View>
+            </View>
+          </View>
+
+          <View >
+            <View style={{flex: 1,}}></View>
+            <View style={styles.darkBubble}>
+              <View style={styles.dBubble}>
+                <Text style={{color:"#b07ce5", fontWeight: 'bold'}}>50 BAC</Text>
               </View>
             </View>
+          </View>
 
-            <View style={{height: 130,}}></View>
-          </ScrollView>
+        </ScrollView>
+      </View>
+
+        <View style={styles.HotBubble}>
+          <TouchableWithoutFeedback style={{flex: 1}} onPress={() => navigation.navigate("Search", {send: true})}>
+            <View style= {{flex: 1, alignItems: 'center'}}>
+              <Image source={require('../static/img/dArrow.png')} style={[styles.arrow, {transform: [{rotateX: '180deg'}]}]}/>
+              <Text style={hotbar}>Sende</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback style={{flex: 1}} onPress={() => navigation.navigate("Search", {send: false})}>
+            <View style= {{flex: 1, alignItems: 'center'}}>
+              <Image source={require('../static/img/dArrow.png')} style={styles.arrow}/>
+              <Text style={hotbar}>Be om</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
-        <Footer navigation={navigation}/>
     </SafeAreaView>
   );
 }
@@ -35,6 +64,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
+    display: 'grid',
+
   },
   textBubble: {
     flexDirection: 'row',
@@ -46,35 +77,31 @@ const styles = StyleSheet.create({
     width: 250,
     height: 50,
     opacity: 0.75
-  },  
+  },
   HotBubble: {
     flex:1,
-    position: 'absolute',
     flexDirection: 'row',
     backgroundColor: "#b07ce5",
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     padding: 15,
     borderRadius: parseFloat("50%"),
-    width: '60%',
-    maxWidth: '100%',
-    height: '11%',
-    bottom: 40,
+    width: parseFloat('100%%'),
+    height: parseFloat('5%'),
     alignSelf: "center",
   },
   darkBubble: {
     flex: 1,
+    flexDirection: 'row',
     backgroundColor: 'rgba(30, 30, 30, 255)', 
     alignItems: 'center', 
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     borderRadius: 20, 
     borderColor: '#461E71', 
     borderWidth: 5, 
-    maxHeight: 550,
     paddingVertical:15,
   },
   dBubble: {
-    flex: 1,
     alignItems: 'center', 
     justifyContent: 'space-around', 
     padding: 30,
@@ -102,6 +129,7 @@ const styles = StyleSheet.create({
     tintColor: 'white'
   },
 });
+let hotbar = {color: "white", fontSize: 14,}
 
 const Usertab = ({Navn}) => {
   return(
