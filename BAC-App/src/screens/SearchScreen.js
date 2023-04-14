@@ -74,7 +74,7 @@ const Search = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'rgba(30, 30, 30, 255)', }}>
-    <Navbar />
+    <Navbar x_able={true} />
       <View style={styles.container}>
         <TextInput
           style={styles.textInputStyle}

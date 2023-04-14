@@ -5,43 +5,42 @@ import Chatbar from '../components/Chatbar';
 import Footer from '../components/Footer';
 
 
-export default function Chat({ navigation, Navn }) {
+export default function Chat({ route, navigation }) {
+
+
+  const { Navn } = route.params;
 
   return (
     <SafeAreaView style={{height:'100%', backgroundColor: '#27272A', }}>
       <Chatbar Navn={Navn}/>
-      <View style={{width: '100%', height: '100%', flex: 49, }}>
+      <View style={{width: '100%', height: '100%', flex: 29, }}>
         <ScrollView contentContainerStyle={styles.scrollContainer} style={{flex:1, backgroundColor: "black",}}>
-          <View style={styles.darkBubble}>
-            <View style={styles.dBubble}>
-              <Text style={{color:"#b07ce5", fontWeight: 'bold'}}>20 BAC</Text>
-            </View>
-            <View style={{flex: 1,}}></View>
-          </View>
+          <Message amnt={20} your={true}>
 
-          <View>
+          </Message>
+          {/* <View>
             <View style={styles.darkBubble}>
               <View style={styles.dBubble}>
                 <Text style={{color:"#b07ce5", fontWeight: 'bold'}}>40 BAC</Text>
               </View>
               <View style={{flex: 1,}}></View>
             </View>
-          </View>
+          </View> */}
 
-          <View >
+          {/* <View >
             <View style={{flex: 1,}}></View>
             <View style={styles.darkBubble}>
               <View style={styles.dBubble}>
                 <Text style={{color:"#b07ce5", fontWeight: 'bold'}}>50 BAC</Text>
               </View>
             </View>
-          </View>
+          </View> */}
 
         </ScrollView>
       </View>
 
         <View style={styles.HotBubble}>
-          <TouchableWithoutFeedback style={{flex: 1}} onPress={() => navigation.navigate("Search", {send: true})}>
+          <TouchableWithoutFeedback style={{flex: 1}} onPress={() => navigation.navigate("Send", {send: true})}>
             <View style= {{flex: 1, alignItems: 'center'}}>
               <Image source={require('../static/img/dArrow.png')} style={[styles.arrow, {transform: [{rotateX: '180deg'}]}]}/>
               <Text style={hotbar}>Sende</Text>
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
     opacity: 0.75
   },
   HotBubble: {
-    flex:1,
+    flex: 1,
     flexDirection: 'row',
     backgroundColor: "#b07ce5",
     alignItems: 'center',
@@ -89,9 +88,9 @@ const styles = StyleSheet.create({
     width: parseFloat('100%%'),
     height: parseFloat('5%'),
     alignSelf: "center",
+    width: 200,
   },
   darkBubble: {
-    flex: 1,
     flexDirection: 'row',
     backgroundColor: 'rgba(30, 30, 30, 255)', 
     alignItems: 'center', 
@@ -100,8 +99,11 @@ const styles = StyleSheet.create({
     borderColor: '#461E71', 
     borderWidth: 5, 
     paddingVertical:15,
+    height: 200,
+    width: 200,
   },
   dBubble: {
+    flexDirection: 'row',
     alignItems: 'center', 
     justifyContent: 'space-around', 
     padding: 30,
@@ -139,4 +141,25 @@ const Usertab = ({Navn}) => {
       </View>
     </TouchableWithoutFeedback>  
   );
+}
+
+const Message = ({amnt},{your} ) => {
+  if (your) {
+    return(
+      <View style={styles.dBubble}>
+        <View style={{flex: 10,}}></View>
+        <View style={styles.darkBubble}>
+          <Text style={{color:"#b07ce5", fontWeight: 'bold', width:parseFloat('100%')}}>{amnt} BAC</Text>
+        </View>
+      </View>
+    )
+  }
+  return(
+    <View style={styles.darkBubble}>
+      <View style={styles.dBubble}>
+        <Text style={{color:"#b07ce5", fontWeight: 'bold'}}>{amnt} BAC</Text>
+      </View>
+      <View style={{flex: 1,}}></View>
+    </View>
+  )
 }

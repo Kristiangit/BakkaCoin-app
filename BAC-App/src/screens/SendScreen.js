@@ -6,11 +6,20 @@ export default function Send({ route, navigation }) {
   const [penger, setPenger] = useState("");
   const munny = +100; // hvor mye BAC bruker har
   const { send, id } = route.params;
-  
+  let buttonMsg;
+  if (send){
+    buttonMsg = "Send";
+  }else {
+    buttonMsg = "Be om";
+  }
+
   const onChangePenger = (text) => {
     if (!isNaN(+text) && text != " ") {
       setPenger(+text);
     };
+    // if () {
+
+    // }
   };
   const confirmSend = () => {
     // console.log(send, " hah ", id, penger, typeof penger)
@@ -18,6 +27,7 @@ export default function Send({ route, navigation }) {
       alert("bad, you poor");
       return
     };
+      
     console.log("money sent")
     navigation.navigate("Chat", {send:send, AccountId:id, })
   };
@@ -38,13 +48,14 @@ export default function Send({ route, navigation }) {
 
   return (
     <SafeAreaView style={{height:'100%', backgroundColor: '#27272A', }}>
-        <Navbar />
+        <Navbar x_able={true}/>
         <View style={{width: '100%', height: '100%', flex: 1}}>
           <View contentContainerStyle={styles.scrollContainer} style={{flex:1, backgroundColor: 'black',}}>
             <View style={{alignItems:'center', margin: 30}}>
               <Text style={{color:"white", fontSize: 52, fontWeight:"bold"}}>Send <Text style={{color:"#501bb8" }}>BAC</Text></Text>
             </View>
             <View style={styles.darkBubble}>
+              <Text style={{color:"white", fontSize: 36}}>{id} </Text>
               <TextInput style={{color:"white", fontSize: 36}} keyboardType='number-pad' placeholder="Penger" value={penger} onChangeText={onChangePenger} />
               <View>
                 <Text style={{color:"white", fontWeight:"bold", }} >Tilgjengelig saldo: {munny} <Text style={{color:"#501bb8" }}>BAC</Text></Text>
@@ -52,7 +63,7 @@ export default function Send({ route, navigation }) {
             </View>
             <TouchableOpacity style={styles.HotBubble} onPress={ifSend}>
               <View>
-
+                <Text>{buttonMsg}</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -129,4 +140,3 @@ const styles = StyleSheet.create({
     tintColor: 'white'
   },
 });
-

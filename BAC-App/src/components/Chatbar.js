@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet,  SafeAreaView, Image, TouchableWithoutFeedback, Text} from 'react-native';
+import { StyleSheet,  SafeAreaView, Image, TouchableWithoutFeedback, Text, View} from 'react-native';
 
 
 
@@ -12,6 +12,7 @@ export default function Chatbar({ Navn }) {
         <Image source={require('../static/img/dArrow.png')} style={styles.logo} />
       </TouchableWithoutFeedback>
       <Text>{Navn}</Text>
+      <View></View>
     </SafeAreaView>
     );
 }
@@ -21,9 +22,10 @@ const styles = StyleSheet.create({
       color: "#fff"
     },
     navbar: {
+      flexDirection: 'row',
       width: '100%',
       maxHeight: 50,
-      justifyContent: "center",
+      justifyContent: "space-between",
       alignItems: "center",
       backgroundColor: '#27272A',
       alignSelf: 'flex-start',
@@ -35,7 +37,7 @@ const styles = StyleSheet.create({
       color: "#fff"
     },
     logo: {
-      maxHeight: 25,
+      maxHeight: 30,
       maxWidth: 38,
     },
   });

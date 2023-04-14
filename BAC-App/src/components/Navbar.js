@@ -1,15 +1,26 @@
-import { StyleSheet,  SafeAreaView, Image, } from 'react-native';
-// import { isIphoneWithNotch } from '../screens/IntroScreen'
+import { StyleSheet,  SafeAreaView, Image, TouchableWithoutFeedback, View} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 
+export default function Navbar({x_able}) {
+  const navigation = useNavigation();
+  if (x_able){
 
-export default function Navbar({}) {
+    return(
+    <SafeAreaView style={styles.navbar}>
+      <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+        <Image source={require('../static/img/dArrow.png')} style={styles.logo} />
+      </TouchableWithoutFeedback>
+      <Image source={require('../static/img/Bakkacoin-logo-hvit2.png')} style={styles.logo}/>
+      <View style={{width: 25}}></View>
+    </SafeAreaView>
+    );
+  };
     return (
         <SafeAreaView style={styles.navbar}>
-        {/* <Button>Click</Button> */}
+        <View></View>
         <Image source={require('../static/img/Bakkacoin-logo-hvit2.png')} style={styles.logo}/>
-        {/* <Text style={styles.bText}>Bakka<Text style={{color: "#AF7BE5",}}>Coin</Text></Text> */}
-        {/* <Button>Click</Button> */}
+        <View></View>
       </SafeAreaView>
     );
 }
@@ -21,11 +32,12 @@ const styles = StyleSheet.create({
     navbar: {
       width: '100%',
       maxHeight: 50,
-      justifyContent: "center",
+      justifyContent: "space-between",
       alignItems: "center",
       backgroundColor: '#27272A',
       alignSelf: 'flex-start',
-      paddingVertical: 1
+      paddingVertical: 5,
+      flexDirection: 'row',
     },
     bText: {
       fontWeight: "bold", 
