@@ -155,7 +155,7 @@ let hotbar = {color: "white", fontSize: 14}
 const Usertab = ({Navn}) => {
   const navigation = useNavigation();
   return(
-    <TouchableWithoutFeedback onPress={() => navigation.navigate("Chat", {Navn:"lol"})} >
+    <TouchableWithoutFeedback onPress={() => navigation.navigate("Chat", {Navn: Navn})} >
       <View style={styles.textBubble}>
         <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',}} >
           <View>

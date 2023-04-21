@@ -11,8 +11,8 @@ export default function Chatbar({ Navn }) {
       <TouchableWithoutFeedback onPress={() => navigation.navigate("Home")}>
         <Image source={require('../static/img/dArrow.png')} style={styles.logo} />
       </TouchableWithoutFeedback>
-      <Text>{Navn}</Text>
-      <View></View>
+      <Text style={{fontWeight: 'bold', fontSize: 20}}>{Navn}</Text>
+      <View style={{width: 38, }}></View>
     </SafeAreaView>
     );
 }
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
       alignItems: "center",
       backgroundColor: '#27272A',
       alignSelf: 'flex-start',
-      paddingVertical: 1
+      paddingVertical: 5
     },
     bText: {
       fontWeight: "bold", 

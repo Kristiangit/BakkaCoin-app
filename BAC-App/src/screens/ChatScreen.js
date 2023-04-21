@@ -1,8 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, ScrollView, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, ScrollView, Image, SafeAreaView, FlatList } from 'react-native';
 import Navbar from '../components/Navbar';
 import Chatbar from '../components/Chatbar';
 import Footer from '../components/Footer';
+
+const data = [
+  {
+    id: '5001',
+    value: '20',
+  },
+  {
+    id: '5002',
+    value: '30',
+  },
+  {
+    id: '5003',
+    value: '45',
+  },
+];
+
 
 
 export default function Chat({ route, navigation }) {
@@ -14,13 +30,28 @@ export default function Chat({ route, navigation }) {
     <SafeAreaView style={{height:'100%', backgroundColor: '#27272A', }}>
       <Chatbar Navn={Navn}/>
       <View style={{width: '100%', height: '100%', flex: 29, }}>
-        <ScrollView contentContainerStyle={styles.scrollContainer} style={{flex:1, backgroundColor: "black",}}>
-          <Message amnt={20} your={true}>
+        <View style={styles.scrollContainer} >
+          <FlatList 
+        data={data}
+        renderItem={<Message/>}
+        keyExtractor={item => item.id}
+          />
 
-          </Message>
+        </View>
+        {/* <ScrollView contentContainerStyle={styles.scrollContainer} style={{flex:1, backgroundColor: "black",}}>
+          <Message amnt={20} your={true} />
+          <Message amnt={40} your={true} />
+          <Message amnt={50} your={false} />
+          <Message amnt={10} your={true} />
+          <Message amnt={30} your={true} />
+          <Message amnt={20} your={false} />
+          <Message amnt={50} your={true} />
+          <Message amnt={10} your={true} />
+          <Message amnt={40} your={false} /> */}
+
           {/* <View>
             <View style={styles.darkBubble}>
-              <View style={styles.dBubble}>
+              <View style={styles.alignStyle}>
                 <Text style={{color:"#b07ce5", fontWeight: 'bold'}}>40 BAC</Text>
               </View>
               <View style={{flex: 1,}}></View>
@@ -30,13 +61,13 @@ export default function Chat({ route, navigation }) {
           {/* <View >
             <View style={{flex: 1,}}></View>
             <View style={styles.darkBubble}>
-              <View style={styles.dBubble}>
+              <View style={styles.alignStyle}>
                 <Text style={{color:"#b07ce5", fontWeight: 'bold'}}>50 BAC</Text>
               </View>
             </View>
           </View> */}
 
-        </ScrollView>
+        {/* </ScrollView> */}
       </View>
 
         <View style={styles.HotBubble}>
@@ -59,12 +90,12 @@ export default function Chat({ route, navigation }) {
 
 const styles = StyleSheet.create({
   scrollContainer: {
-    flexGrow: 1,
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
     display: 'grid',
-
+    backgroundColor: "black",
   },
   textBubble: {
     flexDirection: 'row',
@@ -94,19 +125,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'rgba(30, 30, 30, 255)', 
     alignItems: 'center', 
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     borderRadius: 20, 
     borderColor: '#461E71', 
     borderWidth: 5, 
     paddingVertical:15,
-    height: 200,
-    width: 200,
+    height: 150,
+    width: 150,
   },
-  dBubble: {
+  alignStyle: {
     flexDirection: 'row',
     alignItems: 'center', 
     justifyContent: 'space-around', 
-    padding: 30,
+    width: '100%',
   },
   bTitle: {
   color: "#b07ce5", 
@@ -133,33 +164,24 @@ const styles = StyleSheet.create({
 });
 let hotbar = {color: "white", fontSize: 14,}
 
-const Usertab = ({Navn}) => {
-  return(
-    <TouchableWithoutFeedback onPress={() => {console.log("lol")}} >
-      <View style={styles.textBubble}>
-            <Text style={{fontWeight:'bold', }}>{Navn}</Text> 
-      </View>
-    </TouchableWithoutFeedback>  
-  );
-}
-
-const Message = ({amnt},{your} ) => {
-  if (your) {
+const Message = (props ) => {
+  console.log(props.your)
+  if (props.your) {
     return(
-      <View style={styles.dBubble}>
-        <View style={{flex: 10,}}></View>
+      <View style={styles.alignStyle}>
+        <View style={{width: 10}}></View>
         <View style={styles.darkBubble}>
-          <Text style={{color:"#b07ce5", fontWeight: 'bold', width:parseFloat('100%')}}>{amnt} BAC</Text>
+          <Text style={{color:"#b07ce5", fontWeight: 'bold', width:parseFloat('100%')}}>{props.amnt} BAC</Text>
         </View>
       </View>
     )
   }
   return(
-    <View style={styles.darkBubble}>
-      <View style={styles.dBubble}>
-        <Text style={{color:"#b07ce5", fontWeight: 'bold'}}>{amnt} BAC</Text>
+    <View style={styles.alignStyle}>
+      <View style={styles.darkBubble}>
+        <Text style={{color:"#b07ce5", fontWeight: 'bold', width:parseFloat('100%')}}>{props.amnt} BAC</Text>
       </View>
-      <View style={{flex: 1,}}></View>
-    </View>
+      <View style={{width: 10}}></View>
+  </View>
   )
 }
