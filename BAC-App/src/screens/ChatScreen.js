@@ -6,16 +6,34 @@ import Footer from '../components/Footer';
 
 const data = [
   {
-    id: '5001',
-    value: '20',
+    id: '5003001',
+    amnt: '20',
+    your: true,
   },
   {
-    id: '5002',
-    value: '30',
+    id: '5003002',
+    amnt: '30',
+    your: true
   },
   {
-    id: '5003',
-    value: '45',
+    id: '3005003',
+    amnt: '45',
+    your: false
+  },
+  {
+    id: '3005004',
+    amnt: '10',
+    your: true
+  },
+  {
+    id: '3005005',
+    amnt: '2',
+    your: false
+  },
+  {
+    id: '3005006',
+    amnt: '1',
+    your: false
   },
 ];
 
@@ -23,51 +41,27 @@ const data = [
 
 export default function Chat({ route, navigation }) {
 
-
   const { Navn } = route.params;
+
+  const handleScroll = (event) => {
+    console.log(event.nativeEvent.contentOffset.x);
+    event.nativeEvent.contentOffset.x = 0
+   };
+
 
   return (
     <SafeAreaView style={{height:'100%', backgroundColor: '#27272A', }}>
       <Chatbar Navn={Navn}/>
-      <View style={{width: '100%', height: '100%', flex: 29, }}>
+      <View style={{width: '100%', height: '100%', flex: 24, }}>
         <View style={styles.scrollContainer} >
-          <FlatList 
-        data={data}
-        renderItem={<Message/>}
+          <FlatList
+        data={data.reverse()}
+        renderItem={Message}
         keyExtractor={item => item.id}
+        inverted={true}
+        onScroll={handleScroll}
           />
-
         </View>
-        {/* <ScrollView contentContainerStyle={styles.scrollContainer} style={{flex:1, backgroundColor: "black",}}>
-          <Message amnt={20} your={true} />
-          <Message amnt={40} your={true} />
-          <Message amnt={50} your={false} />
-          <Message amnt={10} your={true} />
-          <Message amnt={30} your={true} />
-          <Message amnt={20} your={false} />
-          <Message amnt={50} your={true} />
-          <Message amnt={10} your={true} />
-          <Message amnt={40} your={false} /> */}
-
-          {/* <View>
-            <View style={styles.darkBubble}>
-              <View style={styles.alignStyle}>
-                <Text style={{color:"#b07ce5", fontWeight: 'bold'}}>40 BAC</Text>
-              </View>
-              <View style={{flex: 1,}}></View>
-            </View>
-          </View> */}
-
-          {/* <View >
-            <View style={{flex: 1,}}></View>
-            <View style={styles.darkBubble}>
-              <View style={styles.alignStyle}>
-                <Text style={{color:"#b07ce5", fontWeight: 'bold'}}>50 BAC</Text>
-              </View>
-            </View>
-          </View> */}
-
-        {/* </ScrollView> */}
       </View>
 
         <View style={styles.HotBubble}>
@@ -114,12 +108,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#b07ce5",
     alignItems: 'center',
     justifyContent: 'space-around',
-    padding: 15,
+    padding: 18,
     borderRadius: parseFloat("50%"),
     width: parseFloat('100%%'),
     height: parseFloat('5%'),
     alignSelf: "center",
     width: 200,
+    marginVertical: 5, 
   },
   darkBubble: {
     flexDirection: 'row',
@@ -132,12 +127,40 @@ const styles = StyleSheet.create({
     paddingVertical:15,
     height: 150,
     width: 150,
+    textAlign: 'center',
+  },
+  redBubble: {
+    flexDirection: 'row',
+    backgroundColor: 'rgba(134, 43, 43,  255)', 
+    alignItems: 'center', 
+    justifyContent: 'center',
+    borderRadius: 20, 
+    borderColor: '#461E71', 
+    borderWidth: 5, 
+    paddingVertical:15,
+    height: 150,
+    width: 150,
+    textAlign: 'center',
+  },
+  greenBubble: {
+    flexDirection: 'row',
+    backgroundColor: 'rgba(38, 120, 18, 255)', 
+    alignItems: 'center', 
+    justifyContent: 'center',
+    borderRadius: 20, 
+    borderColor: '#461E71', 
+    borderWidth: 5, 
+    paddingVertical:15,
+    height: 150,
+    width: 150,
+    textAlign: 'center',
   },
   alignStyle: {
     flexDirection: 'row',
     alignItems: 'center', 
     justifyContent: 'space-around', 
     width: '100%',
+    marginVertical: 18,
   },
   bTitle: {
   color: "#b07ce5", 
@@ -164,22 +187,22 @@ const styles = StyleSheet.create({
 });
 let hotbar = {color: "white", fontSize: 14,}
 
-const Message = (props ) => {
-  console.log(props.your)
-  if (props.your) {
+const Message = ({ item }) => {
+  console.log(item.id)
+  if (item.your) {
     return(
       <View style={styles.alignStyle}>
         <View style={{width: 10}}></View>
-        <View style={styles.darkBubble}>
-          <Text style={{color:"#b07ce5", fontWeight: 'bold', width:parseFloat('100%')}}>{props.amnt} BAC</Text>
+        <View style={[styles.darkBubble, {backgroundColor: '#862B2B4D'}]}>
+          <Text style={{color:"#b07ce5", fontWeight: 'bold', width:parseFloat('100%'), textAlign:'center' }}> - {item.amnt} BAC</Text>
         </View>
       </View>
     )
   }
   return(
     <View style={styles.alignStyle}>
-      <View style={styles.darkBubble}>
-        <Text style={{color:"#b07ce5", fontWeight: 'bold', width:parseFloat('100%')}}>{props.amnt} BAC</Text>
+      <View style={[styles.darkBubble, {backgroundColor: '#5FA0524D'}]}>
+        <Text style={{color:"#b07ce5", fontWeight: 'bold', width:parseFloat('100%'), textAlign:'center'}}> + {item.amnt} BAC</Text>
       </View>
       <View style={{width: 10}}></View>
   </View>

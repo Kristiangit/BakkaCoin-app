@@ -13,7 +13,7 @@ const conLogger = (lol) => {
   }
 }
 const SignOut = (navigation) => {
-  navigation.navigate("Intro")
+  navigation.navigate("Intro");
 }
 
 export default function Profile({ navigation }) {
