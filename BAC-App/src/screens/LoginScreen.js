@@ -33,20 +33,20 @@ export default function Login({ navigation }) {
       }).then(function(response) {
           // Håndterer responsen
           // Vi henter ut json-bodyen i responsen med .json()
-        response.json().then(function(json) {
-          //let array = response
-          //console.log(response)
-          if (json.token == "bad"){
-            setError("Feil brukernavn eller passord")
-            //alert("oops, feil brukernavn eller passord")
-          }
-          else if(json.token == "feil mail"){
-            //console.log("feil ")
-            setError("Feil brukernavn eller passord")
-            //alert("oops, feil brukernavn eller passord")
-          }
-          else{
-            LoginSuccess(navigation, json);
+          response.json().then(function(json) {
+            //let array = response
+            //console.log(response)
+            if (json.token == "bad"){
+              setError("Feil brukernavn eller passord")
+              //alert("oops, feil brukernavn eller passord")
+            }
+            else if(json.token == "feil mail"){
+              //console.log("feil ")
+              setError("Feil brukernavn eller passord")
+              //alert("oops, feil brukernavn eller passord")
+            }
+            else{
+              LoginSuccess(navigation, json);
             };
           })
         });

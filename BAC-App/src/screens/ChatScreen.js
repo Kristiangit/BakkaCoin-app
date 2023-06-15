@@ -45,7 +45,7 @@ export default function Chat({ route, navigation }) {
 
   const handleScroll = (event) => {
     console.log(event.nativeEvent.contentOffset.x);
-    event.nativeEvent.contentOffset.x = 0
+    event.nativeEvent.contentOffset.x = 0;
    };
 
 

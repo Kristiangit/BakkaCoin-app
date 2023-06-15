@@ -4,15 +4,17 @@ import Navbar from '../components/Navbar';
 
 export default function Send({ route, navigation }) {
   const [penger, setPenger] = useState("");
-  const munny = +100; // hvor mye BAC bruker har
-  const { send, id } = route.params;
-  let buttonMsg;
+  const munny = 100; // hvor mye BAC brukeren har
+  const { send, id } = route.params; // parameter fra forrige side
+  
+
   if (send){
-    buttonMsg = "Send";
+    var buttonMsg = "Send";
   }else {
-    buttonMsg = "Be om";
+    var buttonMsg = "Be om";
   }
 
+  // sjekke om penger er en integer
   const onChangePenger = (text) => {
     if (!isNaN(+text) && text != " ") {
       setPenger(+text);
